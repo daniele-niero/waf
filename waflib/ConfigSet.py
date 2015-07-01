@@ -340,3 +340,15 @@ class ConfigSet(object):
 		"""
 		self.table = self.undo_stack.pop(-1)
 
+	def deepcopy(self):
+		"""
+		Create a deep copy (as opposed to .derive) of this ConfigSet.
+		"""
+		merged_table=self.get_merged_dict()
+
+		other = ConfigSet()
+		for key, value in merged_table.iteritems():
+			if key!='undo_stack':
+				other[key] = copy.deepcopy(value)
+		return other
+
