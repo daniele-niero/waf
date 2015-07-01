@@ -131,6 +131,14 @@ class ConfigSet(object):
 		else:
 			del self[name]
 
+	def __iter__(self):
+		merged_table=self.get_merged_dict()
+		return iter(merged_table)
+
+	def iteritems(self):
+		merged_table=self.get_merged_dict()
+		return merged_table.iteritems()
+
 	def derive(self):
 		"""
 		Returns a new ConfigSet deriving from self. The copy returned
